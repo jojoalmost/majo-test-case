@@ -2,7 +2,6 @@ import React from "react";
 import TodoList from "./TodoList";
 
 export default class TodoApp extends React.Component {
-
     render() {
         return (
             <>
@@ -11,7 +10,7 @@ export default class TodoApp extends React.Component {
                     <input type="text" placeholder={'Input Todo'}/>
                     <button>Create Todo</button>
                 </form>
-                <TodoList/>
+                <TodoList />
             </>
         )
     }

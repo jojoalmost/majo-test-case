@@ -1,6 +1,8 @@
 import React from "react"
-import Modal from "./Modal";
 import axios from "axios"
+
+import Modal from "./Modal";
+import List from "./List";
 
 export default class TodoList extends React.Component {
     constructor(props) {
@@ -12,6 +14,10 @@ export default class TodoList extends React.Component {
         }
     }
 
+    componentDidMount() {
+        this.fetchTodoApi();
+    }
+
     fetchTodoApi = () => {
         axios.get('https://897ee1a7-a6ed-46ca-92ca-52a440c60807.mock.pstmn.io/to-do-list').then(res => {
             this.setState({
@@ -20,39 +26,22 @@ export default class TodoList extends React.Component {
         });
     }
 
-    showModal = (item) => {
-        this.setState({
-            isModalShow: true,
-            selectedItem: item,
-        });
-    }
-
-    closeModal = () => {
-        this.setState({
-            isModalShow: false,
-            selectedItem: {},
-        });
-    }
-
-    componentDidMount() {
-        this.fetchTodoApi();
+    onModalOpen = (item) => {
+        this.setState(prevState => ({
+            isModalShow: !prevState.isModalShow,
+            selectedItem: item || {},
+        }));
     }
 
     render() {
+        const { selectedItem, isModalShow, item } = this.state;
         return (
             <>
-                <Modal show={this.state.isModalShow} handleClose={this.closeModal} details={this.state.selectedItem}/>
-                <ul>
-                    {this.state.item.map((item, i) => {
-                        if (item.status) {
-                            return <li key={i} onClick={() => this.showModal(item)}>
-                                <del>{item.title}</del>
-                            </li>
-                        } else {
-                            return <li key={i} onClick={() => this.showModal(item)}>{item.title}</li>
-                        }
-                    })}
-                </ul>
+                <Modal show={isModalShow} handleClose={this.onModalOpen} details={selectedItem}/>
+                done
+                <List items={item} onSelectedItem={this.onModalOpen} filter={1} />
+                belum done
+                <List items={item} onSelectedItem={this.onModalOpen} filter={0} />
             </>
         )
     }
