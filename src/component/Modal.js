@@ -6,7 +6,22 @@ const Modal = ({handleClose, show, details}) => {
     return (
         <div className={showHideClassName} onClick={handleClose}>
             <div className={'modal-body'}>
-                {details.text}
+                <table>
+                    <tbody>
+                    <tr>
+                        <td>title</td>
+                        <td>{details.title}</td>
+                    </tr>
+                    <tr>
+                        <td>description</td>
+                        <td>{details.description}</td>
+                    </tr>
+                    <tr>
+                        <td>crated at</td>
+                        <td>{details.title}</td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     )

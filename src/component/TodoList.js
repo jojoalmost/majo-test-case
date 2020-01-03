@@ -12,13 +12,27 @@ export default class TodoList extends React.Component {
             isModalShow: false,
             selectedItem: {}
         }
+
     }
 
+    // static getDerivedStateFromProps(props, state) {
+    //     let getId = state.item.length + 1;
+    //     console.log(props);
+    //     props.createdData.id = getId;
+    //     if (props.isSubmit) {
+    //         if (props.createdData.title !== null) {
+    //             return state;
+    //         }
+    //         return null
+    //     }
+    //     // Return null if the state hasn't changed
+    //     return null;
+    // }
 
     UNSAFE_componentWillReceiveProps(nextProp) {
         if (!nextProp.isSubmit) return;
-        let id = this.state.item.length + 1;
-        nextProp.createdData.id = id;
+        let getId = this.state.item.length + 1;
+        nextProp.createdData.id = getId;
         this.setState({item: [...this.state.item, nextProp.createdData]});
     }
 

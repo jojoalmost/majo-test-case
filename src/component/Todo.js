@@ -17,8 +17,8 @@ export default class TodoApp extends React.Component {
         e.preventDefault();
         const description = this.state.todo.description;
         const title = this.state.todo.title;
-        this.setState({isSubmit: true});
         if (description !== '' && title !== '') {
+            this.setState({isSubmit: true});
             const date = new Date();
             const currentDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getUTCHours()}:${date.getMinutes()}`;
             this.setState({
