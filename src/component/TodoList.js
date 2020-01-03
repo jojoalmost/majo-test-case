@@ -25,12 +25,10 @@ export default class TodoList extends React.Component {
     deleteTodo = (todo) => {
         if (todo.status) return;
         const filterTodo = this.state.item.filter(item => item.id !== todo.id);
-        console.dir(filterTodo);
         this.setState({item: filterTodo});
     }
 
     editTodo = (todo) => {
-        // console.dir(todo);
         this.props.onEditTodo(todo);
     }
 
@@ -53,6 +51,14 @@ export default class TodoList extends React.Component {
         }));
     }
 
+    onChangeItem = (todo) => {
+        this.setState(prevState => ({
+            item: prevState.item.map(
+                item => item.id === todo.id ? {...item, status: item.status === 1 ? 0 : 1} : item
+            )
+        }))
+    }
+
     render() {
         const {selectedItem, isModalShow, item} = this.state;
         return (
@@ -60,10 +66,10 @@ export default class TodoList extends React.Component {
                 <Modal show={isModalShow} handleClose={this.onModalOpen} details={selectedItem}/>
                 Selesai
                 <List items={item} onSelectedItem={this.onModalOpen} onEditItem={this.editTodo}
-                      onDeleteItem={this.deleteTodo} filter={1}/>
+                      onDeleteItem={this.deleteTodo} filter={1} onChangeItem={this.onChangeItem}/>
                 Belum Selesai
                 <List items={item} onSelectedItem={this.onModalOpen} onEditItem={this.editTodo}
-                      onDeleteItem={this.deleteTodo} filter={0}/>
+                      onDeleteItem={this.deleteTodo} filter={0} onChangeItem={this.onChangeItem}/>
             </>
         )
     }

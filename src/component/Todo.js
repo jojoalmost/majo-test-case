@@ -42,7 +42,7 @@ export default class TodoApp extends React.Component {
 
     render() {
         return (
-            <>
+            <div className='form'>
                 <h3>Todo Test Case</h3>
                 <form onSubmit={this.onSubmitHandler}>
                     <input type="text" placeholder='Input Todo' value={this.state.todo.title}
@@ -56,7 +56,7 @@ export default class TodoApp extends React.Component {
                 </form>
                 <TodoList createdData={this.state.todo} isSubmit={this.state.isSubmit}
                           onEditTodo={this.onEditTodo}/>
-            </>
+            </div>
         )
     }
 }
