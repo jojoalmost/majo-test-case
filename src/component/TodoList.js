@@ -14,6 +14,13 @@ export default class TodoList extends React.Component {
         }
     }
 
+    UNSAFE_componentWillReceiveProps(nextProp) {
+        if (!nextProp.isSubmit) return;
+        let id = this.state.item.length + 1;
+        nextProp.createdData.id = id;
+        this.setState({item: [...this.state.item, nextProp.createdData]});
+    }
+
     componentDidMount() {
         this.fetchTodoApi();
     }
@@ -34,14 +41,14 @@ export default class TodoList extends React.Component {
     }
 
     render() {
-        const { selectedItem, isModalShow, item } = this.state;
+        const {selectedItem, isModalShow, item} = this.state;
         return (
             <>
                 <Modal show={isModalShow} handleClose={this.onModalOpen} details={selectedItem}/>
                 done
-                <List items={item} onSelectedItem={this.onModalOpen} filter={1} />
+                <List items={item} onSelectedItem={this.onModalOpen} filter={1}/>
                 belum done
-                <List items={item} onSelectedItem={this.onModalOpen} filter={0} />
+                <List items={item} onSelectedItem={this.onModalOpen} filter={0}/>
             </>
         )
     }

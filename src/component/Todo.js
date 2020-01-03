@@ -8,20 +8,22 @@ export default class TodoApp extends React.Component {
             description: '',
             createdAt: '',
             status: 0,
-        }
+        },
+        isSubmit: false,
     }
 
     onSubmitHandler = e => {
         e.preventDefault();
         const description = this.state.todo.description;
         const title = this.state.todo.title;
+        this.setState({isSubmit: true});
         if (description !== '' && title !== '') {
             const date = new Date();
             const currentDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getUTCHours()}:${date.getMinutes()}`;
             this.setState({
                 todo: {...this.state.todo, createdAt: currentDate,}
             });
-            console.dir(this.state);
+            // console.dir(this.state);
         }
     }
 
@@ -44,7 +46,7 @@ export default class TodoApp extends React.Component {
                     <br/>
                     <button type={"submit"}>Create Todo</button>
                 </form>
-                <TodoList createdData={this.state.todo}/>
+                <TodoList createdData={this.state.todo} isSubmit={this.state.isSubmit}/>
             </>
         )
     }
