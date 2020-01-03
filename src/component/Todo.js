@@ -24,7 +24,6 @@ export default class TodoApp extends React.Component {
             this.setState({
                 todo: {...this.state.todo, createdAt: currentDate,}
             });
-            // console.dir(this.state);
         }
     }
 

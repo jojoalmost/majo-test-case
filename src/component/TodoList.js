@@ -64,12 +64,16 @@ export default class TodoList extends React.Component {
         return (
             <>
                 <Modal show={isModalShow} handleClose={this.onModalOpen} details={selectedItem}/>
-                Selesai
-                <List items={item} onSelectedItem={this.onModalOpen} onEditItem={this.editTodo}
-                      onDeleteItem={this.deleteTodo} filter={1} onChangeItem={this.onChangeItem}/>
-                Belum Selesai
-                <List items={item} onSelectedItem={this.onModalOpen} onEditItem={this.editTodo}
-                      onDeleteItem={this.deleteTodo} filter={0} onChangeItem={this.onChangeItem}/>
+                <div className='pending'>
+                    <h3>Pending</h3>
+                    <List items={item} onSelectedItem={this.onModalOpen} onEditItem={this.editTodo}
+                          onDeleteItem={this.deleteTodo} filter={0} onChangeItem={this.onChangeItem}/>
+                </div>
+                <div className='finish'>
+                    <h3>Finish</h3>
+                    <List items={item} onSelectedItem={this.onModalOpen} onEditItem={this.editTodo}
+                          onDeleteItem={this.deleteTodo} filter={1} onChangeItem={this.onChangeItem}/>
+                </div>
             </>
         )
     }

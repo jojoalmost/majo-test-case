@@ -27,13 +27,26 @@
 }
 
 .show {
-    display: block;
+    display: inline-block;
 }
 
 .hide {
     display: none;
 }
 
-.form {
-    margin: auto;
+body {
+    background-color: #f3f3f3;
+}
+
+.container {
+    width: 500px;
+    margin: 0 auto;
+}
+
+.pending {
+    float: left;
+}
+
+.finish {
+    float: right;
 }
