@@ -3,23 +3,34 @@ import TodoList from "./TodoList";
 
 export default class TodoApp extends React.Component {
     state = {
-        title: '',
-        description: ''
+        todo: {
+            title: '',
+            description: '',
+            createdAt: '',
+            status: 0,
+        }
     }
 
     onSubmitHandler = e => {
         e.preventDefault();
-        console.dir(this.state);
-
-        const date = new Date();
+        const description = this.state.todo.description;
+        const title = this.state.todo.title;
+        if (description !== '' && title !== '') {
+            const date = new Date();
+            const currentDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getUTCHours()}:${date.getMinutes()}`;
+            this.setState({
+                todo: {...this.state.todo, createdAt: currentDate,}
+            });
+            console.dir(this.state);
+        }
     }
 
     titleInputHandler = e => {
-        this.setState({title: e.target.value})
+        this.setState({todo: {...this.state.todo, title: e.target.value}})
     }
 
     descriptionInputHandler = e => {
-        this.setState({description: e.target.value})
+        this.setState({todo: {...this.state.todo, description: e.target.value}})
     }
 
     render() {
@@ -27,15 +38,13 @@ export default class TodoApp extends React.Component {
             <>
                 <h3>Todo Test Case</h3>
                 <form onSubmit={this.onSubmitHandler}>
-                    <label htmlFor="">Text</label>
-                    <input type="text" placeholder={'Input Todo'} onChange={this.titleInputHandler}/>
+                    <input type="text" placeholder='Input Todo' onChange={this.titleInputHandler}/>
                     <br/>
-                    <label htmlFor="">Deskripsi</label>
-                    <textarea name="" id="" cols="30" rows="10" onChange={this.descriptionInputHandler}></textarea>
+                    <textarea placeholder='Deskripsi' cols="30" rows="10" onChange={this.descriptionInputHandler}/>
                     <br/>
                     <button type={"submit"}>Create Todo</button>
                 </form>
-                <TodoList/>
+                <TodoList createdData={this.state.todo}/>
             </>
         )
     }
