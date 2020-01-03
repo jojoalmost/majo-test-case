@@ -3,7 +3,11 @@ import React from "react";
 const List = props => (
     <ul>
         {props.items.map((item, index) => props.filter === item.status && (
-            <li key={index} onClick={() => props.onSelectedItem(item)} className={item.status ? 'done' : ''}>{item.title}</li>
+            <li key={index} className={item.status ? 'done' : ''}>{item.title}
+                <button onClick={() => props.onSelectedItem(item)}>Detail</button>
+                <button onClick={() => props.onEditItem(item)}>Edit</button>
+                <button onClick={() => props.onDeleteItem(item)} disabled={item.status ? true : false}>Delete</button>
+            </li>
         ))}
     </ul>
 )

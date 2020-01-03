@@ -14,11 +14,24 @@ export default class TodoList extends React.Component {
         }
     }
 
+
     UNSAFE_componentWillReceiveProps(nextProp) {
         if (!nextProp.isSubmit) return;
         let id = this.state.item.length + 1;
         nextProp.createdData.id = id;
         this.setState({item: [...this.state.item, nextProp.createdData]});
+    }
+
+    deleteTodo = (todo) => {
+        if (todo.status) return;
+        const filterTodo = this.state.item.filter(item => item.id !== todo.id);
+        console.dir(filterTodo);
+        this.setState({item: filterTodo});
+    }
+
+    editTodo = (todo) => {
+        // console.dir(todo);
+        this.props.onEditTodo(todo);
     }
 
     componentDidMount() {
@@ -45,10 +58,12 @@ export default class TodoList extends React.Component {
         return (
             <>
                 <Modal show={isModalShow} handleClose={this.onModalOpen} details={selectedItem}/>
-                done
-                <List items={item} onSelectedItem={this.onModalOpen} filter={1}/>
-                belum done
-                <List items={item} onSelectedItem={this.onModalOpen} filter={0}/>
+                Selesai
+                <List items={item} onSelectedItem={this.onModalOpen} onEditItem={this.editTodo}
+                      onDeleteItem={this.deleteTodo} filter={1}/>
+                Belum Selesai
+                <List items={item} onSelectedItem={this.onModalOpen} onEditItem={this.editTodo}
+                      onDeleteItem={this.deleteTodo} filter={0}/>
             </>
         )
     }

@@ -10,6 +10,7 @@ export default class TodoApp extends React.Component {
             status: 0,
         },
         isSubmit: false,
+        isEdit: false,
     }
 
     onSubmitHandler = e => {
@@ -27,6 +28,10 @@ export default class TodoApp extends React.Component {
         }
     }
 
+    onEditTodo = (todo) => {
+        this.setState({todo: todo, isEdit: true});
+    }
+
     titleInputHandler = e => {
         this.setState({todo: {...this.state.todo, title: e.target.value}})
     }
@@ -40,13 +45,17 @@ export default class TodoApp extends React.Component {
             <>
                 <h3>Todo Test Case</h3>
                 <form onSubmit={this.onSubmitHandler}>
-                    <input type="text" placeholder='Input Todo' onChange={this.titleInputHandler}/>
+                    <input type="text" placeholder='Input Todo' value={this.state.todo.title}
+                           onChange={this.titleInputHandler}/>
                     <br/>
-                    <textarea placeholder='Deskripsi' cols="30" rows="10" onChange={this.descriptionInputHandler}/>
+                    <textarea placeholder='Deskripsi' cols="30" rows="10" value={this.state.todo.description}
+                              onChange={this.descriptionInputHandler}/>
                     <br/>
-                    <button type={"submit"}>Create Todo</button>
+                    <button type={"submit"}>Create</button>
+                    <button type={"submit"} className={this.state.isEdit ? 'show' : 'hide'}>Edit</button>
                 </form>
-                <TodoList createdData={this.state.todo} isSubmit={this.state.isSubmit}/>
+                <TodoList createdData={this.state.todo} isSubmit={this.state.isSubmit}
+                          onEditTodo={this.onEditTodo}/>
             </>
         )
     }
