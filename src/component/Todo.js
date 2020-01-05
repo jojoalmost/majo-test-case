@@ -20,7 +20,7 @@ export default class TodoApp extends React.Component {
         if (description !== '' && title !== '') {
             this.setState({isSubmit: true});
             const date = new Date();
-            const currentDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getUTCHours()}:${date.getMinutes()}`;
+            const currentDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getUTCHours()}:${date.getMinutes()}:${date.getSeconds()}`;
             this.setState({
                 todo: {...this.state.input, createdAt: currentDate,}
             });
