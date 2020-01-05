@@ -3,58 +3,78 @@ import TodoList from "./TodoList";
 
 export default class TodoApp extends React.Component {
     state = {
-        todo: {
+        input: {
             title: '',
             description: '',
             createdAt: '',
             status: 0,
         },
+        todo: null,
         isSubmit: false,
         isEdit: false,
     }
 
-    onSubmitHandler = e => {
-        e.preventDefault();
-        const description = this.state.todo.description;
-        const title = this.state.todo.title;
+    onSubmitHandler = (type) => {
+        const description = this.state.input.description;
+        const title = this.state.input.title;
         if (description !== '' && title !== '') {
             this.setState({isSubmit: true});
             const date = new Date();
             const currentDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getUTCHours()}:${date.getMinutes()}`;
             this.setState({
-                todo: {...this.state.todo, createdAt: currentDate,}
+                todo: {...this.state.input, createdAt: currentDate,}
             });
+            this.setState({
+                input: {
+                    title: '',
+                    description: '',
+                    createdAt: '',
+                    status: 0,
+                }
+            }, () => {
+                this.setState({
+                    todo: null,
+                })
+            })
         }
     }
 
     onEditTodo = (todo) => {
-        this.setState({todo: todo, isEdit: true});
+        this.setState({input: todo, isEdit: true});
+    }
+
+    onEditFinished = () => {
+        this.setState({isEdit: false});
     }
 
     titleInputHandler = e => {
-        this.setState({todo: {...this.state.todo, title: e.target.value}})
+        this.setState({input: {...this.state.input, title: e.target.value}})
     }
 
     descriptionInputHandler = e => {
-        this.setState({todo: {...this.state.todo, description: e.target.value}})
+        this.setState({input: {...this.state.input, description: e.target.value}})
     }
 
     render() {
         return (
             <div className='form'>
                 <h3>Todo Test Case</h3>
-                <form onSubmit={this.onSubmitHandler}>
-                    <input type="text" placeholder='Input Todo' value={this.state.todo.title}
+                <form>
+                    <input type="text" placeholder='Input Todo' value={this.state.input.title}
                            onChange={this.titleInputHandler}/>
                     <br/>
-                    <textarea placeholder='Deskripsi' cols="30" rows="10" value={this.state.todo.description}
+                    <textarea placeholder='Deskripsi' cols="30" rows="10" value={this.state.input.description}
                               onChange={this.descriptionInputHandler}/>
                     <br/>
-                    <button type={"submit"}>Create</button>
-                    <button type={"submit"} className={this.state.isEdit ? 'show' : 'hide'}>Edit</button>
+                    <button type={"button"} onClick={() => this.onSubmitHandler('create')}
+                            className={this.state.isEdit ? 'hide' : 'show'}>Create
+                    </button>
+                    <button type={"button"} onClick={() => this.onSubmitHandler('update')}
+                            className={this.state.isEdit ? 'show' : 'hide'}>Update
+                    </button>
                 </form>
-                <TodoList createdData={this.state.todo} isSubmit={this.state.isSubmit}
-                          onEditTodo={this.onEditTodo}/>
+                <TodoList createdData={this.state.todo} onEditTodo={this.onEditTodo} isEdit={this.state.isEdit}
+                          onEditFinished={this.onEditFinished}/>
             </div>
         )
     }

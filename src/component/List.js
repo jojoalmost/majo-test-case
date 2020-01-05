@@ -1,5 +1,4 @@
 import React from "react";
-import Moment from "moment";
 
 const List = props => {
     let sortedArray = props.items.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());

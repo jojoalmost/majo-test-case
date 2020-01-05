@@ -30,10 +30,19 @@ export default class TodoList extends React.Component {
     // }
 
     UNSAFE_componentWillReceiveProps(nextProp) {
-        if (!nextProp.isSubmit) return;
-        let getId = this.state.item.length + 1;
-        nextProp.createdData.id = getId;
-        this.setState({item: [...this.state.item, nextProp.createdData]});
+        if (nextProp.createdData === null) return;
+        if (!nextProp.isEdit) {
+            let getId = this.state.item.length + 1;
+            nextProp.createdData.id = getId;
+            this.setState({item: [...this.state.item, nextProp.createdData]});
+        } else {
+            this.setState(prevState => ({
+                item: prevState.item.map(
+                    item => item.id === nextProp.createdData.id ? nextProp.createdData : item
+                )
+            }));
+            this.props.onEditFinished();
+        }
     }
 
     deleteTodo = (todo) => {
