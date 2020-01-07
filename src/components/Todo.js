@@ -8,35 +8,19 @@ class TodoApp extends React.Component {
         input: {
             title: '',
             description: '',
-            createdAt: '',
-            status: 0,
         },
-        todo: null,
-        isSubmit: false,
-        isEdit: false,
     }
 
-    onSubmitHandler = (type) => {
+    onSubmitHandler = () => {
         const description = this.state.input.description;
         const title = this.state.input.title;
         if (description !== '' && title !== '') {
-            this.setState({isSubmit: true});
-            const date = new Date();
-            const currentDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getUTCHours()}:${date.getMinutes()}:${date.getSeconds()}`;
-            this.setState({
-                todo: {...this.state.input, createdAt: currentDate,}
-            });
+            this.props.addTodo(title, description);
             this.setState({
                 input: {
                     title: '',
-                    description: '',
-                    createdAt: '',
-                    status: 0,
+                    description: ''
                 }
-            }, () => {
-                this.setState({
-                    todo: null,
-                })
             })
         }
     }

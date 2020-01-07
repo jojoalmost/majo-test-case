@@ -1,4 +1,6 @@
 import React from "react";
+import {connect} from "react-redux";
+import {deleteTodo} from "../redux/actions";
 
 const List = props => {
     let sortedArray = props.items.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
@@ -12,12 +14,15 @@ const List = props => {
                     <p onClick={() => props.onChangeItem(item)}>{item.title}</p>
                     <button onClick={() => props.onSelectedItem(item)}>Detail</button>
                     <button onClick={() => props.onEditItem(item)}>Edit</button>
-                    <button onClick={() => props.onDeleteItem(item)} disabled={item.status ? true : false}>Delete
+                    <button onClick={() => props.deleteTodo(item.id)} disabled={item.status ? true : false}>Delete
                     </button>
                 </li>
             ))}
         </ul>
     )
 }
-
-export default List;
+const mapDispatchToProps = dispatch => ({
+    deleteTodo: id => dispatch(deleteTodo(id)),
+    editTodo: id => dispatch(editTodo(id))
+})
+export default connect(null, mapDispatchToProps)(List)

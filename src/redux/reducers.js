@@ -12,6 +12,10 @@ const todos = (state = [], action) => {
                     createdAt: createdAt,
                 }
             ]
+        case 'EDIT_TODO' :
+            return state.map(todo =>
+                todo.id === action.id ? {...todo, status: !todo.status ? 0 : 1} : todo
+            )
         case 'DELETE_TODO' :
             return state.filter(todo => todo.id !== todo.id);
         default:
