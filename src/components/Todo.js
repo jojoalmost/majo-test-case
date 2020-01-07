@@ -1,7 +1,9 @@
 import React from "react";
+import {connect} from 'react-redux';
 import TodoList from "./TodoList";
+import {addTodo} from "../redux/actions";
 
-export default class TodoApp extends React.Component {
+class TodoApp extends React.Component {
     state = {
         input: {
             title: '',
@@ -80,3 +82,10 @@ export default class TodoApp extends React.Component {
     }
 }
 
+const mapDispatchToProps = dispatch => ({
+    addTodo: (title, description) => dispatch(addTodo(title, description))
+})
+
+const mapStateToProps = state => ({})
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoApp)
