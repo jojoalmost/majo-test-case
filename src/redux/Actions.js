@@ -26,7 +26,7 @@ export const deleteTodo = (id) => ({
     id
 })
 
-export const selectedTodo = (id) => ({
+export const selectedTodo = (todo) => ({
     type: SELECTED_TODO,
-    id
+    todo
 })

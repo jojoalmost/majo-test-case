@@ -1,4 +1,4 @@
-import todos from "./TodoReducer";
+import todos from "./TodoReducers";
 import selectedTodo from "./SelectedTodoReducer";
 import {combineReducers} from "redux";
 

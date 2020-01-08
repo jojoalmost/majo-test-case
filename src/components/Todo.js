@@ -25,14 +25,6 @@ class TodoApp extends React.Component {
         }
     }
 
-    onEditTodo = (todo) => {
-        this.setState({input: todo, isEdit: true});
-    }
-
-    onEditFinished = () => {
-        this.setState({isEdit: false});
-    }
-
     titleInputHandler = e => {
         this.setState({input: {...this.state.input, title: e.target.value}})
     }
@@ -52,11 +44,7 @@ class TodoApp extends React.Component {
                     <textarea placeholder='Deskripsi' cols="30" rows="10" value={this.state.input.description}
                               onChange={this.descriptionInputHandler}/>
                     <br/>
-                    <button type={"button"} onClick={() => this.onSubmitHandler('create')}
-                            className={this.state.isEdit ? 'hide' : 'show'}>Create
-                    </button>
-                    <button type={"button"} onClick={() => this.onSubmitHandler('update')}
-                            className={this.state.isEdit ? 'show' : 'hide'}>Update
+                    <button type={"button"} onClick={this.onSubmitHandler}>Create
                     </button>
                 </form>
                 <TodoList/>
@@ -69,6 +57,8 @@ const mapDispatchToProps = dispatch => ({
     addTodo: (title, description) => dispatch(addTodo(title, description))
 })
 
-const mapStateToProps = state => ({})
+const mapStateToProps = state => ({
+    selectedTodo: state.selectedTodo
+})
 
-export default connect(null, mapDispatchToProps)(TodoApp)
+export default connect(mapStateToProps, mapDispatchToProps)(TodoApp)
