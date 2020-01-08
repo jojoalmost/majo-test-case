@@ -2,9 +2,7 @@ import React from "react"
 import axios from "axios"
 import {connect} from 'react-redux'
 
-import Modal from "./Modal";
 import List from "./List";
-import {addTodo} from "../redux/actions";
 
 class TodoList extends React.Component {
     componentDidMount() {
@@ -24,11 +22,11 @@ class TodoList extends React.Component {
             <>
                 <div className='pending'>
                     <h3>Pending</h3>
-                    <List items={this.props.todos} filter={0}/>
+                    <List items={this.props.data.todos} filter={0}/>
                 </div>
                 <div className='finish'>
                     <h3>Finish</h3>
-                    <List items={this.props.todos} filter={1}/>
+                    <List items={this.props.data.todos} filter={1}/>
                 </div>
             </>
         )
@@ -38,7 +36,7 @@ class TodoList extends React.Component {
 const mapDispatchToProps = dispatch => ({})
 
 const mapStateToProps = state => ({
-    todos: state
+    data: state
 })
 
 export default connect(mapStateToProps, null)(TodoList)

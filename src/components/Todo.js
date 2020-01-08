@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from 'react-redux';
 import TodoList from "./TodoList";
-import {addTodo} from "../redux/actions";
+import {addTodo} from "../redux/Actions";
 
 class TodoApp extends React.Component {
     state = {
@@ -59,8 +59,7 @@ class TodoApp extends React.Component {
                             className={this.state.isEdit ? 'show' : 'hide'}>Update
                     </button>
                 </form>
-                <TodoList createdData={this.state.todo} onEditTodo={this.onEditTodo} isEdit={this.state.isEdit}
-                          onEditFinished={this.onEditFinished}/>
+                <TodoList/>
             </div>
         )
     }
@@ -70,8 +69,6 @@ const mapDispatchToProps = dispatch => ({
     addTodo: (title, description) => dispatch(addTodo(title, description))
 })
 
-const mapStateToProps = state => ({
-    selected: state
-})
+const mapStateToProps = state => ({})
 
-export default connect(mapStateToProps, mapDispatchToProps)(TodoApp)
+export default connect(null, mapDispatchToProps)(TodoApp)

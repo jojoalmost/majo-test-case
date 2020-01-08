@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import {deleteTodo, editTodo, toggleTodo} from "../redux/actions";
+import {deleteTodo, editTodo, toggleTodo} from "../redux/Actions";
 
 const List = props => {
     let sortedArray = props.items.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
