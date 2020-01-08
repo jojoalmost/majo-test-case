@@ -1,5 +1,5 @@
 const ADD_TODO = 'ADD_TODO';
-const EDIT_TODO = 'EDIT_TODO';
+const UPDATE_TODO = 'UPDATE_TODO';
 const TOGGLE_TODO = 'TOGGLE_TODO';
 const DELETE_TODO = 'DELETE_TODO';
 const SELECTED_TODO = 'SELECTED_TODO';
@@ -11,9 +11,9 @@ export const addTodo = (title, description) => ({
     title, description
 })
 
-export const editTodo = (id) => ({
-    type: EDIT_TODO,
-    id
+export const updateTodo = (id, title, description) => ({
+    type: UPDATE_TODO,
+    id, title, description
 })
 
 export const toggleTodo = (id) => ({

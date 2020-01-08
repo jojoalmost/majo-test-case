@@ -12,18 +12,10 @@ const todos = (state = [], action) => {
                     createdAt: createdAt,
                 }
             ]
-        case 'EDIT_TODO' :
-            return state.map(todo =>
-                todo.id === action.id ? {selected: {...todo}} : {selected: {}}
-            )
         case 'UPDATE_TODO':
-            return [
-                ...state, {
-                    id: action.id,
-                    title: action.title,
-                    description: action.description,
-                }
-            ]
+            return state.map(todo =>
+                todo.id === action.id ? {...todo, title: action.title, description: action.description} : todo
+            )
         case 'TOGGLE_TODO':
             return state.map(todo =>
                 todo.id === action.id ? {...todo, status: todo.status === 1 ? 0 : 1} : todo
