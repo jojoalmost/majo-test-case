@@ -70,6 +70,8 @@ const mapDispatchToProps = dispatch => ({
     addTodo: (title, description) => dispatch(addTodo(title, description))
 })
 
-const mapStateToProps = state => ({})
+const mapStateToProps = state => ({
+    selected: state
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoApp)

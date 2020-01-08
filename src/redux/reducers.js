@@ -14,7 +14,11 @@ const todos = (state = [], action) => {
             ]
         case 'EDIT_TODO' :
             return state.map(todo =>
-                todo.id === action.id ? {...todo, status: !todo.status ? 0 : 1} : todo
+                todo.id === action.id ? {selected: {...todo}} : {selected: {}}
+            )
+        case 'TOGGLE_TODO':
+            return state.map(todo =>
+                todo.id === action.id ? {...todo, status: todo.status === 1 ? 0 : 1} : todo
             )
         case 'DELETE_TODO' :
             return state.filter(todo => todo.id !== todo.id);

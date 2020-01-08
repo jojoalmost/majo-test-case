@@ -1,5 +1,6 @@
 const ADD_TODO = 'ADD_TODO';
 const EDIT_TODO = 'EDIT_TODO';
+const TOGGLE_TODO = 'TOGGLE_TODO';
 const DELETE_TODO = 'DELETE_TODO';
 
 let nextTodoId = 0;
@@ -11,6 +12,11 @@ export const addTodo = (title, description) => ({
 
 export const editTodo = (id) => ({
     type: EDIT_TODO,
+    id
+})
+
+export const toggleTodo = (id) => ({
+    type: TOGGLE_TODO,
     id
 })
 
