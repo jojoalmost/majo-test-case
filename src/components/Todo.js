@@ -40,7 +40,7 @@ class TodoApp extends React.Component {
                 title: '',
                 description: ''
             })
-            // this.props.selectedNull({});
+            this.props.selectedNull({});
         }
     }
 
@@ -49,14 +49,14 @@ class TodoApp extends React.Component {
     descriptionInputHandler = e => this.setState({description: e.target.value})
 
     render() {
-        const {title, description} = this.state;
         return (
             <div className='form'>
                 <h3>Todo Test Case</h3>
                 <form>
-                    <input type="text" placeholder='Input Todo' value={title} onChange={this.titleInputHandler}/>
+                    <input type="text" placeholder='Input Todo' value={this.state.title || ''}
+                           onChange={this.titleInputHandler}/>
                     <br/>
-                    <textarea placeholder='Deskripsi' cols="30" rows="10" value={description}
+                    <textarea placeholder='Deskripsi' cols="30" rows="10" value={this.state.description || ''}
                               onChange={this.descriptionInputHandler}/>
                     <br/>
                     {Object.keys(this.props.selectedTodo).length !== 0 ? (
