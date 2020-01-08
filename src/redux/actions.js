@@ -6,7 +6,7 @@ const DELETE_TODO = 'DELETE_TODO';
 let nextTodoId = 0;
 export const addTodo = (title, description) => ({
     type: ADD_TODO,
-    id: nextTodoId + 1,
+    id: nextTodoId ++,
     title, description
 })
 
