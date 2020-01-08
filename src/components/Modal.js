@@ -1,7 +1,9 @@
 import React from "react";
+import {connect} from "react-redux";
+import {deleteTodo, selectedTodoModal, toggleTodo} from "../redux/Actions";
+import {selectedTodo} from "../redux/Actions";
 
-const Modal = ({handleClose, show, details}) => {
-    // console.dir(details);
+const Modal = ({handleClose, show, todo}) => {
     const showHideClassName = show ? 'modal display-block' : 'modal display-none';
     return (
         <div className={showHideClassName} onClick={handleClose}>
@@ -9,23 +11,30 @@ const Modal = ({handleClose, show, details}) => {
                 <table>
                     <tbody>
                     <tr>
-                        <td>title</td>
-                        <td>{details.title}</td>
+                        <td>Title</td>
+                        <td>{todo.title}</td>
                     </tr>
                     <tr>
-                        <td>description</td>
-                        <td>{details.description}</td>
+                        <td>Deskripsi</td>
+                        <td>{todo.description}</td>
                     </tr>
                     <tr>
-                        <td>crated at</td>
-                        <td>{details.title}</td>
+                        <td>Created At</td>
+                        <td>{todo.createdAt}</td>
                     </tr>
                     </tbody>
                 </table>
+                <button>Edit</button>
+                <button onClick={() => this.props.deleteTodo(todo.id)}>Delete</button>
             </div>
         </div>
     )
 };
 
-export default Modal;
+const mapDispatchToProps = dispatch => ({
+    deleteTodo: id => dispatch(deleteTodo(id)),
+    selectTodo: item => dispatch(selectedTodo(item)),
+})
+
+export default connect(null, mapDispatchToProps)(Modal)
 

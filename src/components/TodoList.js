@@ -1,12 +1,24 @@
 import React from "react"
 import axios from "axios"
 import {connect} from 'react-redux'
-
 import List from "./List";
+import Modal from "./Modal";
 
 class TodoList extends React.Component {
+    state = {
+        isModalShow: false,
+    }
+
     componentDidMount() {
         this.fetchTodoApi();
+    }
+
+    componentWillReceiveProps(props) {
+        if (Object.keys(props.data.selectedModalTodo).length !== Object.keys(this.props.data.selectedModalTodo).length) {
+            this.setState({
+                isModalShow: true,
+            })
+        }
     }
 
     fetchTodoApi = () => {
@@ -20,6 +32,7 @@ class TodoList extends React.Component {
     render() {
         return (
             <>
+                <Modal show={this.state.isModalShow} todo={this.props.data.selectedModalTodo}/>
                 <div className='pending'>
                     <h3>Pending</h3>
                     <List items={this.props.data.todos} filter={0}/>
