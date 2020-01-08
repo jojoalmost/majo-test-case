@@ -16,7 +16,7 @@ const List = props => {
                     <p onClick={() => props.toggleTodo(item.id)}>{item.title}</p>
                     <button onClick={() => props.selectedTodoModal(item)}>Show</button>
                     <button onClick={() => props.selectTodo(item)}>Edit</button>
-                    <button onClick={() => props.deleteTodo(item.id)} disabled={item.status ? true : false}>Delete
+                    <button onClick={() => props.deleteTodo(item.id)} disabled={item.status ? true : false} className={item.status ? 'hide' : 'show'}>Delete
                     </button>
                 </li>
             ))}

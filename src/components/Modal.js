@@ -1,12 +1,12 @@
 import React from "react";
 import {connect} from "react-redux";
-import {deleteTodo, selectedTodoModal, toggleTodo} from "../redux/Actions";
+import {deleteTodo} from "../redux/Actions";
 import {selectedTodo} from "../redux/Actions";
 
-const Modal = ({handleClose, show, todo}) => {
+const Modal = ({handleClose, show, todo, deleteTodo, selectTodo}) => {
     const showHideClassName = show ? 'modal display-block' : 'modal display-none';
     return (
-        <div className={showHideClassName} onClick={handleClose}>
+        <div className={showHideClassName} onClick={handleClose} ref={node => this.node = node}>
             <div className={'modal-body'}>
                 <table>
                     <tbody>
@@ -24,8 +24,9 @@ const Modal = ({handleClose, show, todo}) => {
                     </tr>
                     </tbody>
                 </table>
-                <button>Edit</button>
-                <button onClick={() => this.props.deleteTodo(todo.id)}>Delete</button>
+                <button onClick={() => selectTodo(todo)}>Edit</button>
+                <button onClick={() => deleteTodo(todo.id)} className={todo.status ? 'hide' : 'show'}>Delete
+                </button>
             </div>
         </div>
     )
