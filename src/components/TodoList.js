@@ -29,10 +29,16 @@ class TodoList extends React.Component {
         });
     }
 
+    onCloseHandler = () => {
+        console.log('dsada');
+        this.setState({isModalShow: false});
+    }
+
     render() {
         return (
             <>
-                <Modal handleClose={() => this.setState({isModalShow: false})} show={this.state.isModalShow}
+                <Modal handleClose={this.onCloseHandler}
+                       show={this.state.isModalShow}
                        todo={this.props.data.selectedModalTodo}/>
                 <div className='pending'>
                     <h3>Pending</h3>
