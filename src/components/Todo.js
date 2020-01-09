@@ -2,8 +2,7 @@ import React from "react";
 import {connect} from 'react-redux';
 import TodoList from "./TodoList";
 import TodoForm from "./TodoForm";
-import {addTodo, updateTodo} from "../redux/Actions";
-import {selectedTodo} from "../redux/Actions";
+import {selectedTodo, addTodo, updateTodo} from "../redux/Actions";
 
 class TodoApp extends React.Component {
     render() {

@@ -1,8 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import {deleteTodo, updateTodo} from "../redux/Actions";
-import {selectedTodo} from "../redux/Actions";
-import TodoForm from "./TodoForm";
+import {selectedTodo, deleteTodo, selectedTodoModal, updateTodo} from "../redux/Actions";
 
 class Modal extends React.Component {
     state = {
@@ -11,23 +9,23 @@ class Modal extends React.Component {
         description: '',
     }
 
-    componentWillMount() {
-        document.addEventListener('mousedown', this.handleClick, false);
-    }
-
-    componentWillUnmount() {
-        document.addEventListener('mousedown', this.handleClick, false);
-    }
-
-    handleClick = e => {
-        if (this.node.contains(e.target)) {
-            return;
-        }
-    }
-
-    handleClickOutside = () => {
-        console.log('outside');
-    }
+    // componentWillMount() {
+    //     document.addEventListener('mousedown', this.handleClick, false);
+    // }
+    //
+    // componentWillUnmount() {
+    //     document.addEventListener('mousedown', this.handleClick, false);
+    // }
+    //
+    // handleClick = e => {
+    //     if (this.node.contains(e.target)) {
+    //         return;
+    //     }
+    // }
+    //
+    // handleClickOutside = () => {
+    //     console.log('outside');
+    // }
 
     titleInputHandler = e => this.setState({title: e.target.value})
 
@@ -42,8 +40,9 @@ class Modal extends React.Component {
                 title: '',
                 description: '',
                 isEdit: false,
-            })
+            });
             this.props.selectTodo({});
+            this.props.selectedTodoModal({});
             this.props.handleClose();
         }
     }
@@ -51,12 +50,7 @@ class Modal extends React.Component {
     componentWillReceiveProps(props) {
         if (Object.keys(props.data.selectedTodo).length !== Object.keys(this.props.data.selectedTodo).length) {
             this.setState({
-                isEdit: true
-            });
-        }
-
-        if (Object.keys(props.data.selectedTodo).length !== Object.keys(this.props.data.selectedTodo).length) {
-            this.setState({
+                isEdit: true,
                 title: props.data.selectedTodo.title,
                 description: props.data.selectedTodo.description
             });
@@ -72,7 +66,7 @@ class Modal extends React.Component {
         const {show, todo, handleClose, selectTodo, deleteTodo} = this.props;
         const showHideClassName = show ? 'modal display-block' : 'modal display-none';
         return (
-            <div className={showHideClassName} onClick={handleClose} ref={node => this.node = node}>
+            <div className={showHideClassName} ref={node => this.node = node}>
                 <div className={'modal-body'}>
                     {this.state.isEdit ? (
                         <div className='form'>
@@ -120,6 +114,7 @@ const mapDispatchToProps = dispatch => ({
     deleteTodo: id => dispatch(deleteTodo(id)),
     updateTodo: (id, title, description) => dispatch(updateTodo(id, title, description)),
     selectTodo: item => dispatch(selectedTodo(item)),
+    selectedTodoModal: item => dispatch(selectedTodoModal(item)),
 })
 
 const mapStateToProps = state => ({
