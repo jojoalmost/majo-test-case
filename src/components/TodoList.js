@@ -32,7 +32,8 @@ class TodoList extends React.Component {
     render() {
         return (
             <>
-                <Modal show={this.state.isModalShow} todo={this.props.data.selectedModalTodo}/>
+                <Modal handleClose={() => this.setState({isModalShow: false})} show={this.state.isModalShow}
+                       todo={this.props.data.selectedModalTodo}/>
                 <div className='pending'>
                     <h3>Pending</h3>
                     <List items={this.props.data.todos} filter={0}/>
