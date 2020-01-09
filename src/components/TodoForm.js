@@ -1,7 +1,6 @@
 import React from "react";
 import {connect} from 'react-redux';
-import {addTodo, updateTodo} from "../redux/Actions";
-import {selectedTodo} from "../redux/Actions";
+import {selectedTodo, addTodo, updateTodo} from "../redux/Actions";
 
 class TodoForm extends React.Component {
     state = {

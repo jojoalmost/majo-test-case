@@ -1,8 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import {deleteTodo, toggleTodo} from "../redux/Actions";
-import {selectedTodo} from "../redux/Actions";
-import {selectedTodoModal} from "../redux/Actions";
+import {selectedTodo, selectedTodoModal, deleteTodo, toggleTodo} from "../redux/Actions";
 
 const List = props => {
     let sortedArray = props.items.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
@@ -16,7 +14,8 @@ const List = props => {
                     <p onClick={() => props.toggleTodo(item.id)}>{item.title}</p>
                     <button onClick={() => props.selectedTodoModal(item)}>Show</button>
                     <button onClick={() => props.selectTodo(item)}>Edit</button>
-                    <button onClick={() => props.deleteTodo(item.id)} disabled={item.status ? true : false} className={item.status ? 'hide' : 'show'}>Delete
+                    <button onClick={() => props.deleteTodo(item.id)} disabled={item.status ? true : false}
+                            className={item.status ? 'hide' : 'show'}>Delete
                     </button>
                 </li>
             ))}

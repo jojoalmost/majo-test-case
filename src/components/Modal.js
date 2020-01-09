@@ -1,8 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import {deleteTodo, updateTodo} from "../redux/Actions";
-import {selectedTodo} from "../redux/Actions";
-import TodoForm from "./TodoForm";
+import {selectedTodo, deleteTodo, selectedTodoModal, updateTodo} from "../redux/Actions";
 
 class Modal extends React.Component {
     state = {
@@ -120,6 +118,7 @@ const mapDispatchToProps = dispatch => ({
     deleteTodo: id => dispatch(deleteTodo(id)),
     updateTodo: (id, title, description) => dispatch(updateTodo(id, title, description)),
     selectTodo: item => dispatch(selectedTodo(item)),
+    selectedTodoModal: item => dispatch(selectedTodoModal(item)),
 })
 
 const mapStateToProps = state => ({
